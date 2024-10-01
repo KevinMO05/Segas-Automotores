@@ -38,21 +38,25 @@
 <body class="font-rambla bg-gradient-to-tr from-[#acacac] from-[25%] to-[#006BAB] w-screen h-screen flex justify-center items-center">
     <div id="main" class="container bg-white rounded-xl h-[23rem] w-[59rem] flex items-center drop-shadow-2xl"  style="box-shadow: 0px 0px 15px rgb(0, 0, 0, .2);">
         <div class=" overflow-visible z-20 absolute sign-in bg-[#006BAB] w-[28rem] h-[32rem] ml-20 rounded-xl transition-all" style="box-shadow: 0px 0px 15px rgb(0, 0, 0, .2);">
-            <form action="#" class=" h-full flex items-center flex-col ">
+            {{-- FORMULARIO DE INICIAR SESION --}}
+            <form action="/login-validation" method="POST" class=" h-full flex items-center flex-col ">
+                @csrf
                 <h1 class="text-5xl text-gray-50 m-20">Iniciar Sesión</h1>
-                <input class=" bg-transparent border-b-2 py-3 px-4 my-2 mx-4 w-[16rem] outline-none placeholder:text-gray-300 text-gray-50" type="text" name="usuario" placeholder="Usuario">
-                <input class="bg-transparent border-b-2 py-3 px-4 my-2 mx-4 w-[16rem] outline-none placeholder:text-gray-300 text-gray-50" type="password" name="password" placeholder="Contraseña">
+                <input class=" bg-transparent border-b-2 py-3 px-4 my-2 mx-4 w-[16rem] outline-none placeholder:text-gray-300 text-gray-50" type="text" name="email" placeholder="Email" value="">
+                <input class="bg-transparent border-b-2 py-3 px-4 my-2 mx-4 w-[16rem] outline-none placeholder:text-gray-300 text-gray-50" type="password" name="password" placeholder="Contraseña" value="">
                 <div class="space-x-10 mt-10 ">
                     <a class="text-gray-300 hover:text-gray-50" href="#"> Recuperar contraseña</a>
-                    <button class="bg-gray-100 text-gray-800 px-6 py-4 rounded-xl hover:bg-gray-50 hover:scale-105 transition-all">Iniciar Sesión</button>
+                    <button type="submit" class="bg-gray-100 text-gray-800 px-6 py-4 rounded-xl hover:bg-gray-50 hover:scale-105 transition-all">Iniciar Sesión</button>
                 </div>
             </form>
         </div>
         <div class="  z-10 aboslute register bg-[#006BAB] w-[28rem] h-[32rem] ml-20 rounded-xl transition-all " style="box-shadow: 0px 0px 15px rgb(0, 0, 0, .2);">
-        <form action="#" class="h-full flex  items-center flex-col">
+            {{-- FORMULARIO DE REGISTRO DE USUARIO --}}
+            <form action="/login-register" method="POST" class="h-full flex  items-center flex-col">
+                @csrf
             <h1 class="text-5xl text-gray-50 m-16">Registrarse</h1>
-            <input class="bg-transparent border-b-2 py-3 px-4 my-2 mx-4 w-[16rem] outline-none placeholder:text-gray-300 text-gray-50" type="text" name="nombre" placeholder="Nombre">
-            <input class="bg-transparent border-b-2 py-3 px-4 my-2 mx-4 w-[16rem] outline-none placeholder:text-gray-300 text-gray-50" type="text" name="usuario" placeholder="Usuario">
+            <input class="bg-transparent border-b-2 py-3 px-4 my-2 mx-4 w-[16rem] outline-none placeholder:text-gray-300 text-gray-50" type="text" name="name" placeholder="Nombre">
+            <input class="bg-transparent border-b-2 py-3 px-4 my-2 mx-4 w-[16rem] outline-none placeholder:text-gray-300 text-gray-50" type="email" name="email" placeholder="Email">
             <input class="bg-transparent border-b-2 py-3 px-4 my-2 mx-4 w-[16rem] outline-none placeholder:text-gray-300 text-gray-50" type="password" name="password" placeholder="Contraseña">
              <button class="bg-gray-100 text-gray-800 px-6 py-4 mt-6 rounded-xl hover:bg-gray-50 hover:scale-105 transition-all">Registrarse</button>
         </form>
