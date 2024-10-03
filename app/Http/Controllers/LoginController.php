@@ -24,10 +24,10 @@ class LoginController extends Controller
         $usuario = Usuario::where('email', $request->email)->first();
 
         if ($usuario && $usuario->email == $request->email) {
-            return redirect('/login')->with('error', 'El usuario ya existe');
+            return redirect('/')->with('error', 'El usuario ya existe');
         } else {
             $usuario->save();
-            return redirect('/login')->with('success', 'Usuario registrado exitosamente');
+            return redirect('/welcome')->with('success', 'Usuario registrado exitosamente');
         }
     }
 
@@ -57,9 +57,9 @@ class LoginController extends Controller
 
 
         if ($usuario && $usuario->email === $email && $usuario->password === $password  ) {
-            return redirect('/')->with('success', 'Credenciales Correctas');
+            return redirect('/welcome')->with('success', 'Credenciales Correctas');
         } else {
-            return redirect('/login')->with('error', 'Credenciales Incorrectas');
+            return redirect('/')->with('error', 'Credenciales Incorrectas');
         }
     }
 }
