@@ -34,29 +34,29 @@ class LoginController extends Controller
     public function login(Request $request)
     {
 
-        $validatedData = Validator::make($request->all(), [
+        $validated = Validator::make($request->all(), [
             'email' => 'required|email',
             'password' => 'required',
         ]);
-
-        if ($validatedData->fails()) {
-            return redirect('/login')->with('error', 'Credenciales incorrectas');
+        
+        if ($validated->fails()) {
+            return redirect('/login')->with('error', 'El correo electrónico debe contener un @');
         }
+        
+        $validateded = Validator::make($request->all(), [
+            'email' => 'required|email',
+            'password' => 'required',
+        ])->validated();
 
-        $email = "";
-        $password = "";
-
-        $email = $validatedData['email'];
-        $password = $validatedData['password'];
+        $email = $validateded['email'];
+        $password = $validateded['password'];
 
 
 
         $usuario = Usuario::where('email', $request->email)->first();
 
 
-
-
-        if ($usuario && $usuario->email === $email && $usuario->password === $password) {
+        if ($usuario && $usuario->email === $email && $usuario->password === $password  ) {
             return redirect('/')->with('success', 'Credenciales Correctas');
         } else {
             return redirect('/login')->with('error', 'Credenciales Incorrectas');
