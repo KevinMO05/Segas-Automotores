@@ -6,9 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     @vite('resources/css/app.css')
-    <title>Document</title>
+    <title>Login | Segas Automores</title>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="sweetalert2.all.min.js"></script>
+    <script src="https://kit.fontawesome.com/21efb330de.js" crossorigin="anonymous"></script>
+    <link rel="icon" type="image" href="{{asset('img/Group 8.svg')}}">
 
     <style>
         .container.right-panel-active .sign-in {
@@ -54,9 +56,13 @@
                 <input
                     class=" bg-transparent border-b-2 py-3 px-4 my-2 mx-4 w-[16rem] outline-none placeholder:text-gray-300 text-gray-50"
                     type="text" name="email" placeholder="Email" value="" required>
-                <input
-                    class="bg-transparent border-b-2 py-3 px-4 my-2 mx-4 w-[16rem] outline-none placeholder:text-gray-300 text-gray-50"
-                    type="password" name="password" placeholder="Contraseña" value="" required>
+                <div class="w-[18rem] flex items-center justify-center">
+                    <input
+                        class="bg-transparent border-b-2 w-full py-3 px-4 my-2 mx-4  outline-none placeholder:text-gray-300 text-gray-50 z-10"
+                        type="password" name="password" placeholder="Contraseña" id="login-password" value="" required>
+                    <button type="button" id="login-view" class="z-20 cursor-pointer"> <i id="login-icon"
+                            class="fa-solid fa-eye -ml-20 text-slate-100 "></i></button>
+                </div>
                 <div class="space-x-10 mt-10 ">
                     <a class="text-gray-300 hover:text-gray-50" href="#"> Recuperar contraseña</a>
                     <button type="submit"
@@ -77,9 +83,14 @@
                 <input
                     class="bg-transparent border-b-2 py-3 px-4 my-2 mx-4 w-[16rem] outline-none placeholder:text-gray-300 text-gray-50"
                     type="email" name="email" placeholder="Email" required>
-                <input
-                    class="bg-transparent border-b-2 py-3 px-4 my-2 mx-4 w-[16rem] outline-none placeholder:text-gray-300 text-gray-50"
-                    type="password" name="password" placeholder="Contraseña" required>
+                <div class="w-[18rem] flex items-center justify-center">
+                    <input
+                        class="bg-transparent border-b-2 w-full py-3 px-4 my-2 mx-4  outline-none placeholder:text-gray-300 text-gray-50 z-10"
+                        type="password" name="password" placeholder="Contraseña" id="register-password" value=""
+                        required>
+                    <button type="button" id="register-view" class="z-20 cursor-pointer"> <i id="register-icon"
+                            class="fa-solid fa-eye -ml-20 text-slate-100 "></i></button>
+                </div>
                 <button
                     class="bg-gray-100 text-gray-800 px-6 py-4 mt-6 rounded-xl hover:bg-gray-50 hover:scale-105 transition-all duration-300">Registrarse</button>
             </form>
@@ -107,11 +118,40 @@
         const main = document.getElementById('main');
 
         registerButton.addEventListener('click', () => {
-            main.classList.add("right-panel-active");
+            main.classList.add("right-panel-active")
+            document.title="Registrarse | Segas Automotores";
         })
         signinButton.addEventListener('click', () => {
             main.classList.remove("right-panel-active");
+            document.title="Login | Segas Automotores";
         })
+
+
+        // Función para alternar la visibilidad de la contraseña
+        function togglePassword(inputId, iconId) {
+            const passwordInput = document.getElementById(inputId);
+            const icon = document.getElementById(iconId);
+
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                passwordInput.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        }
+
+        // Event listener para el formulario de inicio de sesión
+        document.getElementById('login-view').addEventListener('click', function() {
+            togglePassword('login-password', 'login-icon');
+        });
+
+        // Event listener para el formulario de registro
+        document.getElementById('register-view').addEventListener('click', function() {
+            togglePassword('register-password', 'register-icon');
+        });
     </script>
 
     @if (session('success'))
@@ -127,7 +167,8 @@
                     popup: 'swal-popup',
                 },
                 willOpen: () => {
-                    document.body.style.zIndex = '9999';              },
+                    document.body.style.zIndex = '9999';
+                },
                 willClose: () => {
                     document.body.style.overflow = 'auto';
                 }
@@ -154,7 +195,8 @@
                     popup: 'swal-popup',
                 },
                 willOpen: () => {
-                    document.body.style.zIndex = '9999';              },
+                    document.body.style.zIndex = '9999';
+                },
                 willClose: () => {
                     document.body.style.overflow = 'auto';
                 }
